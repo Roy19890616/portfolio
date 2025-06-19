@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投資組合視覺化分析報告 (10年期)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 100%;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        th, td {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-12">
+
+        <!-- Part 1: Investment Portfolio Table -->
+        <div>
+            <h1 class="text-3xl font-bold mb-6 text-center text-white">第一部分：投資組合詳情</h1>
+            <div class="bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 table-responsive">
+                <table class="w-full text-sm text-left text-gray-300">
+                    <thead class="text-xs text-gray-100 uppercase bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">投資標的</th>
+                            <th scope="col" class="px-4 py-3">比重</th>
+                            <th scope="col" class="px-4 py-3">類型</th>
+                            <th scope="col" class="px-4 py-3">基金簡單說明</th>
+                            <th scope="col" class="px-4 py-3">國家/註冊地</th>
+                            <th scope="col" class="px-4 py-3">近三年年化報酬率 (估算)</th>
+                            <th scope="col" class="px-4 py-3">標準差 (估算)</th>
+                            <th scope="col" class="px-4 py-3">配息率</th>
+                            <th scope="col" class="px-4 py-3">費用率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-4 font-medium text-white">**VOO**</td>
+                            <td class="px-4 py-4">25%</td>
+                            <td class="px-4 py-4"><span class="bg-yellow-900 text-yellow-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">平衡</span></td>
+                            <td class="px-4 py-4">追蹤美國前500大龍頭企業的S&P 500指數，是長期核心持股的黃金標準，費用極低。</td>
+                            <td class="px-4 py-4">美國</td>
+                            <td class="px-4 py-4">9.6%</td>
+                            <td class="px-4 py-4">17.8%</td>
+                            <td class="px-4 py-4">約 1.24%</td>
+                            <td class="px-4 py-4">0.03%</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-4 font-medium text-white">**QQQM**</td>
+                            <td class="px-4 py-4">25%</td>
+                            <td class="px-4 py-4"><span class="bg-red-900 text-red-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">積極</span></td>
+                            <td class="px-4 py-4">專為長期投資者設計的那斯達克100指數ETF，費用較QQQ低，持股與結構相同。</td>
+                            <td class="px-4 py-4">美國</td>
+                            <td class="px-4 py-4">10.3%</td>
+                            <td class="px-4 py-4">23.5%</td>
+                            <td class="px-4 py-4">約 0.61%</td>
+                            <td class="px-4 py-4">0.15%</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-4 font-medium text-white">**MOAT**</td>
+                            <td class="px-4 py-4">15%</td>
+                            <td class="px-4 py-4"><span class="bg-green-900 text-green-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">保守</span></td>
+                            <td class="px-4 py-4">VanEck發行，追蹤具備持續性競爭優勢（護城河）的美國公司，屬於價值/品質因子投資。</td>
+                            <td class="px-4 py-4">美國</td>
+                            <td class="px-4 py-4">7.9%</td>
+                            <td class="px-4 py-4">19.2%</td>
+                            <td class="px-4 py-4">約 1.15%</td>
+                            <td class="px-4 py-4">0.46%</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-4 font-medium text-white">**IAU**</td>
+                            <td class="px-4 py-4">15%</td>
+                            <td class="px-4 py-4"><span class="bg-green-900 text-green-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">保守</span></td>
+                            <td class="px-4 py-4">長期持有實體黃金的低成本選擇，費用顯著低於GLD。</td>
+                            <td class="px-4 py-4">全球</td>
+                            <td class="px-4 py-4">5.8%</td>
+                            <td class="px-4 py-4">15.1%</td>
+                            <td class="px-4 py-4">N/A</td>
+                            <td class="px-4 py-4">0.25%</td>
+                        </tr>
+                        <tr class="border-b border-gray-700">
+                            <td class="px-4 py-4 font-medium text-white">**比特幣**</td>
+                            <td class="px-4 py-4">10%</td>
+                            <td class="px-4 py-4"><span class="bg-red-900 text-red-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">積極</span></td>
+                            <td class="px-4 py-4">直接持有去中心化的加密貨幣資產，完全掌握私鑰，無中介機構。</td>
+                            <td class="px-4 py-4">全球</td>
+                            <td class="px-4 py-4">約 35%</td>
+                            <td class="px-4 py-4">約 80%</td>
+                            <td class="px-4 py-4">N/A</td>
+                            <td class="px-4 py-4">0%¹</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-4 font-medium text-white">**VWO**</td>
+                            <td class="px-4 py-4">10%</td>
+                            <td class="px-4 py-4"><span class="bg-red-900 text-red-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">積極</span></td>
+                            <td class="px-4 py-4">專注於高成長潛力的新興市場國家，如中國、印度、台灣等，但伴隨較高的波動與政治風險。</td>
+                            <td class="px-4 py-4">新興市場</td>
+                            <td class="px-4 py-4">-2.0%</td>
+                            <td class="px-4 py-4">約 20.0%</td>
+                            <td class="px-4 py-4">約 3.44%</td>
+                            <td class="px-4 py-4">0.08%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <p class="text-xs text-gray-400 mt-4">¹ 直接持有比特幣沒有年度管理費，但在買賣或轉帳時會產生交易手續費。</p>
+            </div>
+        </div>
+
+        <!-- Part 2: Investment Allocation -->
+        <div>
+            <h1 class="text-3xl font-bold mb-8 text-center text-white">第二部分：投資佔比分析</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                    <h2 class="text-xl font-bold mb-4 text-center">依「類型」分佈</h2>
+                    <div class="chart-container">
+                        <canvas id="typePieChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                    <h2 class="text-xl font-bold mb-4 text-center">依「國家/註冊地」分佈</h2>
+                    <div class="chart-container">
+                        <canvas id="countryPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Part 3: Future Growth Projection (10 Years) -->
+        <div>
+            <h1 class="text-3xl font-bold mb-8 text-center text-white">第三部分：未來10年財富增長預測</h1>
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="chart-container" style="height: 500px;">
+                    <canvas id="projectionLineChart"></canvas>
+                </div>
+                <div class="mt-6 text-sm text-gray-400 p-4 bg-gray-900 rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-200 mb-2">圖表說明與假設</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>本金：</strong> 新台幣 5,000,000 元。</li>
+                        <li><strong>平均年化報酬率：</strong> 採用您投資組合的加權平均值 <strong>10.33%</strong>。</li>
+                        <li><strong>預估年化標準差：</strong> 採用您投資組合的加權平均值 <strong>25.47%</strong> 作為波動的估算基礎。</li>
+                        <li><strong>預期增長 (中線)：</strong> 基於 10.33% 的年化報酬率進行複利計算。</li>
+                        <li><strong>樂觀情境 (上緣)：</strong> 預期報酬率 + 1個標準差 (10.33% + 25.47%)。</li>
+                        <li><strong>悲觀情境 (下緣)：</strong> 預期報酬率 - 1個標準差 (10.33% - 25.47%)。</li>
+                        <li class="!mt-3 text-amber-400"><strong class="font-bold">重要提醒：</strong> 此圖表為基於歷史數據的簡化數學模型推算，並非投資建議或未來表現的保證。真實市場的波動遠比模型複雜，且高波動性資產(如比特幣)對標準差的影響巨大，請謹慎參考。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Chart.js Global Configuration
+        Chart.defaults.color = '#a0aec0';
+        Chart.defaults.font.family = "'Noto Sans TC', sans-serif";
+
+        // --- Pie Chart 1: Allocation by Type ---
+        const typeCtx = document.getElementById('typePieChart').getContext('2d');
+        new Chart(typeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['積極', '保守', '平衡'],
+                datasets: [{
+                    label: '投資類型佔比',
+                    data: [45, 30, 25], // 積極: 25+10+10, 保守: 15+15, 平衡: 25
+                    backgroundColor: [
+                        'rgba(220, 38, 38, 0.7)',  // Red for Aggressive
+                        'rgba(22, 163, 74, 0.7)',  // Green for Conservative
+                        'rgba(252, 211, 77, 0.7)' // Yellow for Balanced
+                    ],
+                    borderColor: [
+                        'rgba(220, 38, 38, 1)',
+                        'rgba(22, 163, 74, 1)',
+                        'rgba(252, 211, 77, 1)'
+                    ],
+                    borderWidth: 1,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- Pie Chart 2: Allocation by Country ---
+        const countryCtx = document.getElementById('countryPieChart').getContext('2d');
+        new Chart(countryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['美國', '全球', '新興市場'],
+                datasets: [{
+                    label: '國家/地區佔比',
+                    data: [65, 25, 10], // 美國: 25+25+15, 全球: 15+10, 新興市場: 10
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.7)',
+                        'rgba(139, 92, 246, 0.7)',
+                        'rgba(234, 179, 8, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(139, 92, 246, 1)',
+                        'rgba(234, 179, 8, 1)'
+                    ],
+                    borderWidth: 1,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // --- Line Chart 3: 10-Year Projection ---
+        const projectionCtx = document.getElementById('projectionLineChart').getContext('2d');
+        
+        const initialPrincipal = 5000000;
+        const years = 10; // Updated to 10 years
+        const annualReturn = 0.1033;
+        const stdDev = 0.2547;
+
+        const labels = Array.from({length: years + 1}, (_, i) => `第 ${i} 年`);
+        const expectedData = [];
+        const optimisticData = [];
+        const pessimisticData = [];
+
+        for (let i = 0; i <= years; i++) {
+            expectedData.push(initialPrincipal * Math.pow(1 + annualReturn, i));
+            optimisticData.push(initialPrincipal * Math.pow(1 + annualReturn + stdDev, i));
+            pessimisticData.push(initialPrincipal * Math.pow(1 + annualReturn - stdDev, i));
+        }
+
+        new Chart(projectionCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: '樂觀情境 (+1 SD)',
+                        data: optimisticData,
+                        borderColor: 'rgba(74, 222, 128, 0.8)',
+                        backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: '預期增長',
+                        data: expectedData,
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderWidth: 3,
+                        fill: 'origin',
+                        tension: 0.1
+                    },
+                     {
+                        label: '悲觀情境 (-1 SD)',
+                        data: pessimisticData,
+                        borderColor: 'rgba(239, 68, 68, 0.8)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderWidth: 2,
+                        fill: '-1',
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, values) {
+                                if (value >= 100000000) {
+                                    return (value / 100000000) + ' 億';
+                                }
+                                if (value >= 10000) {
+                                    return (value / 10000) + ' 萬';
+                                }
+                                return value;
+                            }
+                        }
+                    },
+                    x: {}
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }).format(context.parsed.y);
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                     legend: {
+                        position: 'top',
+                     }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
